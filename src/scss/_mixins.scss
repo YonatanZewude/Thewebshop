@@ -1,1 +1,13 @@
-// Hamburger icon mixin
+@mixin buttonStyles {
+    background-color: #4caf50;
+    color: white;
+    padding: 4px 8px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    border-radius: 7px;
+
+    &:hover {
+        background-color: #3a8d3e;
+    }
+}

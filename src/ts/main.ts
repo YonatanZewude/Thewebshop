@@ -9,7 +9,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 
 function createProductCard(product: Product) {
   const card = document.createElement("div");
-  card.classList.add("product-card");
+  card.classList.add("product");
 
   const createDetailsElement = (label: string, value: string | number) => {
     const p = document.createElement("p");
@@ -18,13 +18,13 @@ function createProductCard(product: Product) {
   };
 
   const details = document.createElement("div");
-  details.classList.add("product-details");
+  details.classList.add("product__details");
 
   details.appendChild(createDetailsElement("Brand", product.brand));
   details.appendChild(createDetailsElement("Model", product.model));
 
   const price = createDetailsElement("Price", product.price.toFixed(0));
-  price.classList.add("product-price");
+  price.classList.add("product__price");
   details.appendChild(price);
 
   const AddToCart: HTMLButtonElement = document.createElement("button");
@@ -37,7 +37,7 @@ function createProductCard(product: Product) {
   details.appendChild(AddToCart);
 
   const image = document.createElement("img");
-  image.classList.add("product-image");
+  image.classList.add("product__image");
   image.src = product.imageUrl;
   image.alt = product.model;
 
