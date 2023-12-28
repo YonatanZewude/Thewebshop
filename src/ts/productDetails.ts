@@ -39,6 +39,16 @@ export function createHtmlModal(product: Product) {
       product.price ? product.price.toFixed(0) : "N/A"
     } kr`;
 
+    const discription = document.createElement("p");
+    discription.innerHTML = `<strong>Discription:</strong> ${product.discription}`;
+
+    const AddToCart: HTMLButtonElement = document.createElement("button");
+    AddToCart.textContent = "Add To Cart";
+    AddToCart.addEventListener("click", () => {
+      alert("Button clicked!");
+    });
+    AddToCart.id = "AddToCartFromModal";
+
     modalBody.appendChild(image);
     details.appendChild(brand);
     details.appendChild(model);
@@ -46,6 +56,8 @@ export function createHtmlModal(product: Product) {
     details.appendChild(quantity);
     details.appendChild(size);
     details.appendChild(price);
+    details.appendChild(discription);
+    details.appendChild(AddToCart);
     modalBody.appendChild(details);
   }
 }

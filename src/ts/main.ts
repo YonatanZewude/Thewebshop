@@ -89,7 +89,8 @@ const products = productsData.map(
       data.size,
       data.price,
       data.imageUrl,
-      data.quantity
+      data.quantity,
+      data.discription
     )
 );
 
@@ -118,7 +119,8 @@ function getProductsFromJson() {
             val.size,
             val.price,
             val.image,
-            val.quantity
+            val.quantity,
+            val.discription
           )
       );
 
