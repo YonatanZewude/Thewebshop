@@ -4,8 +4,9 @@ import "./../scss/style.scss";
 import { Product } from "./models/product.ts";
 import { createHtmlModal } from "./productDetails.ts";
 import { getProductById } from "./functions.ts";
+import { getProductsFromJson } from "./functions.ts";
 
-function createProductCard(product: Product) {
+export function createProductCard(product: Product) {
   const card = document.createElement("div");
   card.classList.add("product");
 
@@ -92,39 +93,6 @@ const products = productsData.map(
 );
 
 console.log(products);
-
-function displayProducts(products: Array<Product>) {
-  const productContainer = document.getElementById("product-container");
-
-  products.forEach((product) => {
-    const card = createProductCard(product);
-    productContainer?.appendChild(card);
-  });
-}
-
-function getProductsFromJson() {
-  fetch("./src/test.json")
-    .then((response) => response.json())
-    .then((products) => {
-      const productsList = products.map(
-        (val: any) =>
-          new Product(
-            val.id,
-            val.brand,
-            val.model,
-            val.color,
-            val.size,
-            val.price,
-            val.image,
-            val.quantity,
-            val.discription
-          )
-      );
-
-      displayProducts(productsList);
-    })
-    .catch((error) => console.error("Error fetching products:", error));
-}
 
 getProductsFromJson();
 
