@@ -1,10 +1,15 @@
 @use "./mixins" as m;
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f8f8f8;
+    scroll-behavior: smooth;
+
 }
 
 #product-container {
@@ -25,9 +30,15 @@ body {
     width: 200px;
     background-color: #fff;
 
+    @media (min-width: 1200px) {
+        flex: 0 0 calc(15%);
+
+    }
+
 
     &:hover {
         transform: scale(1.05);
+
     }
 
     &__image {
@@ -52,14 +63,27 @@ body {
         }
     }
 
-    &__price {
-        font-size: 18px;
-        font-weight: bold;
-        color: #333;
-        margin-top: 10px;
-    }
 
     #AddToCart {
         @include m.buttonStyles;
+
     }
+
+
+    @media (max-width: 768px) {
+        width: 100%;
+        margin: 10;
+
+        #AddToCart {
+            float: right;
+            margin-bottom: 20px;
+        }
+    }
+}
+
+#ashu {
+    font-size: 17px;
+    font-weight: bold;
+    color: #fa0505;
+    margin-top: 10px;
 }

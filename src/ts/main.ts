@@ -3,9 +3,7 @@ import * as bootstrap from "bootstrap";
 import "./../scss/style.scss";
 import { Product } from "./models/product.ts";
 import { createHtmlModal } from "./productDetails.ts";
-import axios from "axios";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min";
+import { getProductById } from "./functions.ts";
 
 function createProductCard(product: Product) {
   const card = document.createElement("div");
@@ -23,8 +21,9 @@ function createProductCard(product: Product) {
   details.appendChild(createDetailsElement("Brand", product.brand));
   details.appendChild(createDetailsElement("Model", product.model));
 
-  const price = createDetailsElement("Price", product.price.toFixed(0));
+  const price = createDetailsElement("Price", `${product.price.toFixed(0)} kr`);
   price.classList.add("product__price");
+  price.id = "ashu";
   details.appendChild(price);
 
   const AddToCart: HTMLButtonElement = document.createElement("button");
@@ -59,10 +58,8 @@ function createProductCard(product: Product) {
           const myModal = new bootstrap.Modal(modalElement);
           myModal.show();
         } else {
-          console.error("Modal element not found");
+          alert("Product not found");
         }
-      } else {
-        console.error("Product ID is null or undefined");
       }
     } catch (error) {
       console.error("Error fetching product details:", error);
@@ -129,15 +126,20 @@ function getProductsFromJson() {
     .catch((error) => console.error("Error fetching products:", error));
 }
 
-async function getProductById(id: number) {
-  try {
-    const response = await axios.get(`./src/test.json?id=${id}`);
-    console.log("Product details:", response.data);
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching product details:", error);
-    throw error;
-  }
-}
-
 getProductsFromJson();
+
+document.addEventListener("ScrollUpToTop", function () {
+  const scrollUpButton = document.querySelector(".scrollUpButton");
+
+  if (scrollUpButton) {
+    scrollUpButton.addEventListener("click", scrollToTop);
+  }
+
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
+});
+document.dispatchEvent(new Event("ScrollUpToTop"));

@@ -3,5 +3,17 @@
 
 button#AddToCartFromModal {
     @include m.buttonStyles;
+
     float: right;
+}
+
+.product-image {
+
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+
+    @media (max-width: 768px) {
+        width: 100%;
+
+    }
 }

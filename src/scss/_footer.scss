@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}
+
 .footer {
     background-color: #333;
     color: #fff;
@@ -11,7 +15,7 @@
 
         @media (max-width: 768px) {
             flex-direction: column;
-            gap: 0px;
+            gap: 10px;
         }
     }
 
@@ -47,17 +51,7 @@
         }
     }
 
-    a[href="index.html"] {
-        display: inline-block;
-        margin-top: 20px;
-        color: #fff;
-        text-decoration: none;
 
-        &:hover {
-            color: #007bff;
-            text-decoration: underline;
-        }
-    }
 
     @media (max-width: 768px) {
         &__social-media a {
@@ -83,4 +77,32 @@
 
 #emailInput {
     border-radius: 7px;
+}
+
+body {
+    scroll-behavior: smooth;
+}
+
+#scrollUpButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none;
+    background-color: #5290d3;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+#scrollUpButton:hover {
+    background-color: #386fa4;
+}
+
+/* Show the button when scrolling down */
+body.scroll-down #scrollUpButton {
+    display: block;
 }
