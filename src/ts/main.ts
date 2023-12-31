@@ -5,16 +5,11 @@ import { Product } from "./models/product.ts";
 import { createHtmlModal } from "./productDetails.ts";
 import { getProductById } from "./functions.ts";
 import { getProductsFromJson } from "./functions.ts";
+import { createDetailsElement } from "./functions.ts";
 
 export function createProductCard(product: Product) {
   const card = document.createElement("div");
   card.classList.add("product");
-
-  const createDetailsElement = (label: string, value: string | number) => {
-    const p = document.createElement("p");
-    p.innerHTML = `<strong>${label}:</strong> ${value}`;
-    return p;
-  };
 
   const details = document.createElement("div");
   details.classList.add("product__details");
@@ -75,24 +70,24 @@ export function createProductCard(product: Product) {
   return card;
 }
 
-const productsData: any[] = [];
+// const productsData: any[] = [];
 
-const products = productsData.map(
-  (data: any) =>
-    new Product(
-      data.id,
-      data.brand,
-      data.model,
-      data.color,
-      data.size,
-      data.price,
-      data.imageUrl,
-      data.quantity,
-      data.discription
-    )
-);
+// const products = productsData.map(
+//   (data: any) =>
+//     new Product(
+//       data.id,
+//       data.brand,
+//       data.model,
+//       data.color,
+//       data.size,
+//       data.price,
+//       data.imageUrl,
+//       data.quantity,
+//       data.discription
+//     )
+// );
 
-console.log(products);
+// console.log(products);
 
 getProductsFromJson();
 

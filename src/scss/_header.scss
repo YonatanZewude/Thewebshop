@@ -34,6 +34,7 @@ body {
   float: right;
   font-size: 18px;
   height: 30%;
+  padding-right: 20%;
 }
 
 .nav>.nav-links>a {
@@ -41,10 +42,14 @@ body {
   padding: 13px 10px;
   text-decoration: none;
   color: #efefef;
+  margin: 0 20px;
+
 }
 
 .nav>.nav-links>a:hover {
   background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 7px;
+  height: 50px;
 }
 
 .nav>#nav-check {
@@ -121,4 +126,8 @@ body {
   .nav>#nav-check:checked~.nav-links {
     height: calc(30vh);
   }
+}
+
+.cart {
+  margin: auto;
 }

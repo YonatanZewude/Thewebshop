@@ -45,3 +45,12 @@ function displayProducts(products: Array<Product>) {
     productContainer?.appendChild(card);
   });
 }
+
+export const createDetailsElement = (
+  label: string,
+  value: string | number
+): HTMLParagraphElement => {
+  const p: HTMLParagraphElement = document.createElement("p");
+  p.innerHTML = `<strong>${label}:</strong> ${value}`;
+  return p;
+};
