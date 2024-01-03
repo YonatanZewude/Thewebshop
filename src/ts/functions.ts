@@ -54,3 +54,12 @@ export const createDetailsElement = (
   p.innerHTML = `<strong>${label}:</strong> ${value}`;
   return p;
 };
+
+export function createAddToCartButton(product: Product) {
+  const addToCart: HTMLButtonElement = document.createElement("button");
+  addToCart.textContent = "Add To Cart";
+  addToCart.id = String(product.id);
+  addToCart.classList.add("addToCart");
+
+  return addToCart;
+}

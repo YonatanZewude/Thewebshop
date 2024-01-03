@@ -1,4 +1,7 @@
 import { Product } from "./product";
 export class Cart {
-  constructor(public products: Array<Product>, public totalPrice: number) {}
+  constructor(
+    public products: Map<String, number>,
+    public totalPrice: number
+  ) {}
 }

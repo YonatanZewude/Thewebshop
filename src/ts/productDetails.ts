@@ -1,7 +1,9 @@
 import "./../scss/style.scss";
+import { createAddToCartButton, createDetailsElement } from "./functions.ts";
+import { Cart } from "./models/cart.ts";
 import { Product } from "./models/product.ts";
 
-export function createHtmlModal(product: Product) {
+export function createHtmlModal(cart: Cart, product: Product) {
   const modalBody = document.getElementById("modal-body");
   const modalTitle = document.getElementById("exampleModalLabel");
 
@@ -17,37 +19,25 @@ export function createHtmlModal(product: Product) {
     const details = document.createElement("div");
     details.classList.add("product-details");
 
-    const brand = document.createElement("p");
-    brand.innerHTML = `<strong>Brand:</strong> ${product.brand}`;
+    const brand = createDetailsElement("Brand", `${product.brand}`);
 
-    const model = document.createElement("p");
-    model.innerHTML = `<strong>Model:</strong> ${product.model}`;
+    const model = createDetailsElement("Model", `${product.model}`);
 
-    const color = document.createElement("p");
-    color.innerHTML = `<strong>Color:</strong> ${product.color}`;
+    const color = createDetailsElement("Color", `${product.color}`);
 
-    const quantity = document.createElement("p");
-    quantity.innerHTML = `<strong>Quantity:</strong> ${product.quantity}`;
+    const quantity = createDetailsElement("Quantity", `${product.quantity}`);
 
-    const size = document.createElement("p");
-    size.innerHTML = `<strong>Size:</strong> ${product.size}`;
+    const size = createSizeList(product);
 
-    const price = document.createElement("p");
+    const price = createDetailsElement("Price", `${product.price} kr`);
     price.classList.add("product-price");
 
-    price.innerHTML = `<strong>Price:</strong> ${
-      product.price ? product.price.toFixed(0) : "N/A"
-    } kr`;
+    const discription = createDetailsElement(
+      "Discription",
+      `${product.discription}`
+    );
 
-    const discription = document.createElement("p");
-    discription.innerHTML = `<strong>Discription:</strong> ${product.discription}`;
-
-    const AddToCart: HTMLButtonElement = document.createElement("button");
-    AddToCart.textContent = "Add To Cart";
-    AddToCart.addEventListener("click", () => {
-      alert("Button clicked!");
-    });
-    AddToCart.id = "AddToCartFromModal";
+    const buttnAddToCart = createAddToCartButton(product);
 
     modalBody.appendChild(image);
     details.appendChild(brand);
@@ -57,7 +47,93 @@ export function createHtmlModal(product: Product) {
     details.appendChild(size);
     details.appendChild(price);
     details.appendChild(discription);
-    details.appendChild(AddToCart);
+    details.appendChild(buttnAddToCart);
     modalBody.appendChild(details);
+
+    handleAddToCart(cart, product);
   }
+}
+
+function createSizeList(product: Product) {
+  const sizeElement = document.createElement("select");
+  sizeElement.id = "sizeOption";
+
+  const defaultOption = document.createElement("option");
+  defaultOption.setAttribute("value", "");
+  const defaultText = document.createTextNode("Chosse your size ...");
+  defaultOption.appendChild(defaultText);
+  sizeElement.appendChild(defaultOption);
+
+  for (let i = 0; i < product.sizes.length; i++) {
+    let option = document.createElement("option");
+    option.setAttribute("value", String(product.sizes[i]));
+    let text = document.createTextNode(String(product.sizes[i]));
+    option.appendChild(text);
+    sizeElement.appendChild(option);
+  }
+
+  document.body.appendChild(sizeElement);
+  return sizeElement;
+}
+function handleAddToCart(cart: Cart, product: Product) {
+  const cartIcon = document.getElementById("cartSpan");
+  document.getElementById(String(product.id))?.addEventListener("click", () => {
+    let size = (<HTMLSelectElement>document.getElementById("sizeOption")).value;
+
+    if (size.length === 0) {
+      alert("Please select size!");
+      return;
+    }
+
+    console.log("selected size : ", size);
+    console.log("Product before: ", product);
+    let tempProduct = structuredClone(product);
+    tempProduct.sizes.length = 0;
+    tempProduct.sizes.push(Number(size));
+
+    cart.products.set(
+      JSON.stringify(tempProduct),
+      increamentQunatity(cart, JSON.stringify(tempProduct))
+    );
+
+    cart.totalPrice = calculateTotalPrice(cart);
+    let cartCount = getTotalCount(cart);
+    if (cartIcon !== null) {
+      cartIcon.innerHTML = `${cartCount}`;
+    }
+
+    const productElement = document.createElement("p");
+    productElement.textContent = `Product ${cartCount}`;
+  });
+}
+
+function calculateTotalPrice(cart: Cart) {
+  let totalPrice = 0;
+  cart.products.forEach((quantity, product) => {
+    let p = JSON.parse(String(product));
+
+    let subTotalPrice = p.price * quantity;
+    console.log("Sub total Price for produce: ", p, subTotalPrice);
+    totalPrice += subTotalPrice;
+    console.log("Total Price for produce: ", p, totalPrice);
+  });
+  return totalPrice;
+}
+
+function increamentQunatity(cart: Cart, product: String) {
+  let quantity = 1;
+  if (cart.products.has(product)) {
+    cart.products.forEach((q, p) => {
+      if (p === product) {
+        quantity = q + 1;
+      }
+    });
+  }
+
+  return quantity;
+}
+function getTotalCount(cart: Cart) {
+  let totalCount = 0;
+  cart.products.forEach((quantity, _) => (totalCount += quantity));
+  return totalCount;
 }

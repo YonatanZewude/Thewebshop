@@ -3,9 +3,11 @@ import * as bootstrap from "bootstrap";
 import "./../scss/style.scss";
 import { Product } from "./models/product.ts";
 import { createHtmlModal } from "./productDetails.ts";
-import { getProductById } from "./functions.ts";
-import { getProductsFromJson } from "./functions.ts";
+import { getProductById, getProductsFromJson } from "./functions.ts";
 import { createDetailsElement } from "./functions.ts";
+import { Cart } from "./models/cart.ts";
+
+let cart = new Cart(new Map(), 0);
 
 export function createProductCard(product: Product) {
   const card = document.createElement("div");
@@ -17,50 +19,19 @@ export function createProductCard(product: Product) {
   details.appendChild(createDetailsElement("Brand", product.brand));
   details.appendChild(createDetailsElement("Model", product.model));
 
-  const price = createDetailsElement("Price", `${product.price.toFixed(0)} kr`);
+  const price = createDetailsElement("Price", `${product.price} kr`);
   price.classList.add("product__price");
-  price.id = "ashu";
+  price.id = "productPrice";
   details.appendChild(price);
-
-  const AddToCart: HTMLButtonElement = document.createElement("button");
-  AddToCart.textContent = "Add To Cart";
-  AddToCart.addEventListener("click", () => {
-    alert("Button clicked!");
-  });
-  AddToCart.id = "AddToCart";
-
-  details.appendChild(AddToCart);
 
   const image = document.createElement("img");
   image.classList.add("product__image");
   image.src = product.imageUrl;
   image.alt = product.model;
 
-  console.log("Product:", product);
+  // console.log("Product:", product);
 
-  const handleClick = async () => {
-    try {
-      // kolla upp om produkt är inte  null
-      if (product.id != null) {
-        const productDetails = await getProductById(product.id);
-        console.log("Product details:", productDetails);
-
-        createHtmlModal(product);
-        console.log(product);
-
-        const modalElement = document.getElementById("exampleModal");
-
-        if (modalElement) {
-          const myModal = new bootstrap.Modal(modalElement);
-          myModal.show();
-        } else {
-          alert("Product not found");
-        }
-      }
-    } catch (error) {
-      console.error("Error fetching product details:", error);
-    }
-  };
+  const handleClick = modalHandler(product);
 
   card.addEventListener("click", handleClick);
 
@@ -69,25 +40,6 @@ export function createProductCard(product: Product) {
 
   return card;
 }
-
-// const productsData: any[] = [];
-
-// const products = productsData.map(
-//   (data: any) =>
-//     new Product(
-//       data.id,
-//       data.brand,
-//       data.model,
-//       data.color,
-//       data.size,
-//       data.price,
-//       data.imageUrl,
-//       data.quantity,
-//       data.discription
-//     )
-// );
-
-// console.log(products);
 
 getProductsFromJson();
 
@@ -106,3 +58,24 @@ document.addEventListener("ScrollUpToTop", function () {
   }
 });
 document.dispatchEvent(new Event("ScrollUpToTop"));
+
+function modalHandler(product: Product) {
+  return async () => {
+    try {
+      if (product.id != null) {
+        await getProductById(product.id);
+        createHtmlModal(cart, product);
+        //console.log(product);
+        const modalElement = document.getElementById("exampleModal");
+        if (modalElement) {
+          const myModal = new bootstrap.Modal(modalElement);
+          myModal.show();
+        } else {
+          alert("Product not found");
+        }
+      }
+    } catch (error) {
+      console.error("Error fetching product details:", error);
+    }
+  };
+}

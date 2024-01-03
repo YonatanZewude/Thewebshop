@@ -64,26 +64,31 @@ body {
     }
 
 
-    #AddToCart {
-        @include m.buttonStyles;
 
-    }
 
 
     @media (max-width: 768px) {
         width: 100%;
         margin: 10;
 
-        #AddToCart {
-            float: right;
-            margin-bottom: 20px;
-        }
     }
 }
 
-#ashu {
+#productPrice {
     font-size: 17px;
     font-weight: bold;
     color: #fa0505;
     margin-top: 10px;
+}
+
+#AddToCart {
+    @include m.buttonStyles;
+    margin: 14px;
+
+    @media (max-width: 768px) {
+
+        float: right;
+
+    }
+
 }

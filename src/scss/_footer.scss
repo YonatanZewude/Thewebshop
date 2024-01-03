@@ -1,9 +1,11 @@
+@use "./variables.scss" as v;
+
 html {
     scroll-behavior: smooth;
 }
 
 .footer {
-    background-color: #333;
+    background-color: v.$footerAndHeader-background;
     color: #fff;
     text-align: center;
     padding: 20px;
@@ -83,14 +85,10 @@ body {
     scroll-behavior: smooth;
 }
 
-#scrollUpButton {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    display: none;
-    background-color: #5290d3;
+.scrollUpButton {
+    background-color: #568dc7;
     color: #fff;
-    padding: 10px;
+    padding: 3px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -98,7 +96,7 @@ body {
     transition: background-color 0.3s ease-in-out;
 }
 
-#scrollUpButton:hover {
+.scrollUpButton:hover {
     background-color: #386fa4;
 }
 
