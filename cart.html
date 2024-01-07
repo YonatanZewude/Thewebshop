@@ -8,8 +8,81 @@
 </head>
 
 <body>
+
+    <header>
+        <div class="nav">
+            <input type="checkbox" id="nav-check">
+            <div class="nav-header">
+                <div class="nav-title">
+                    WalkInClouds
+                </div>
+            </div>
+            <div class="nav-btn">
+                <label for="nav-check">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </label>
+            </div>
+
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="#footer-section">About</a>
+                <a href="cart.html">Sale</a>
+                <a href="#">Brand</a>
+            </div>
+            <li class="cart">
+                <a class="btn btn-light" href="/cart.html" id="cartIcon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cartSpan">0</span>
+                </a>
+            </li>
+        </div>
+    </header>
     <h1>Shopping Cart</h1>
     <div id="cartContent"></div>
+
+    <footer class="footer">
+        <section id="footer-section" class="footer__section">
+
+            <div class="footer__social-Media">
+                <p class="footer__p">&copy; 2023 WalkInClouds. All rights reserved.</p>
+                <div class="subscribe">
+                    <p class="footer__p">Subscribe to our newsletter for updates:</p>
+                    <form action="/subscribe" method="post" class="subscription-form">
+                        <input id="emailInput" type="email" name="email" placeholder="Your Email" required />
+                        <button id="subscribe" type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer__social-media">
+                <h5>Social Media</h5>
+
+                <a href="https://twitter.com" target="_blank">
+                    <i class="fa-brands fa-twitter fa-1x"></i>
+                </a>
+
+                <a href="https://facebook.com" target="_blank">
+                    <i class="fa-brands fa-facebook-f fa-1x"></i>
+                </a>
+
+                <a href="https://instagram.com" target="_blank">
+                    <i class="fa-brands fa-instagram fa-1x"></i>
+                </a>
+            </div>
+
+
+            <div class="footer__contact-info">
+                <h5>Contact Information</h5>
+
+                <p class="contact__info-item">contact@walkinclouds.com</p>
+                <p class="contact__info-item">Erstagatan 1b</p>
+                <p class="contact__info-item">123 31 Stockholm</p>
+            </div>
+        </section>
+        <button class="scrollUpButton">Back to Top</button>
+
+    </footer>
 
     <script type="module" src="/src/ts/cart.ts"></script>
 

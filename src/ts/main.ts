@@ -1,4 +1,3 @@
-// Import necessary modules and styles
 import * as bootstrap from "bootstrap";
 import "./../scss/style.scss";
 import { Product } from "./models/product.ts";
@@ -28,8 +27,6 @@ export function createProductCard(product: Product) {
   image.classList.add("product__image");
   image.src = product.imageUrl;
   image.alt = product.model;
-
-  // console.log("Product:", product);
 
   const handleClick = modalHandler(product);
 
@@ -65,7 +62,6 @@ function modalHandler(product: Product) {
       if (product.id != null) {
         await getProductById(product.id);
         createHtmlModal(cart, product);
-        //console.log(product);
         const modalElement = document.getElementById("exampleModal");
         if (modalElement) {
           const myModal = new bootstrap.Modal(modalElement);

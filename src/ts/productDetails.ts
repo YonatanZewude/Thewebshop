@@ -105,10 +105,8 @@ function handleAddToCart(cart: Cart, product: Product) {
       products: productsArray,
       totalPrice: cart.totalPrice,
     };
-    // Convert the object to a JSON string
     const jsonString = JSON.stringify(cartObject);
 
-    // Save the JSON string to local storage
     localStorage.setItem("cart", jsonString);
   });
 }
