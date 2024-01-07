@@ -1,19 +1,48 @@
 @use "./mixins" as m;
 
+.modal-content {
+    width: auto;
+    height: auto;
 
-button#AddToCartFromModal {
-    @include m.buttonStyles;
+}
 
-    float: right;
+.modal {
+    @media (max-width: 768px) {
+        top: 50px;
+        padding-bottom: 100px;
+
+    }
+}
+
+.product-details {
+    height: auto;
 }
 
 .product-image {
 
-    width: 100%;
+    width: 50%;
     border-bottom: 1px solid #ddd;
 
     @media (max-width: 768px) {
         width: 100%;
 
     }
+}
+
+.addToCart {
+    margin-right: 200px;
+
+    @include m.buttonStyles;
+    float: right;
+    margin-right: 20px;
+
+
+}
+
+
+
+#sizeOption {
+    margin-bottom: 50px;
+    border-bottom: 1px black solid;
+
 }

@@ -80,15 +80,3 @@ body {
     color: #fa0505;
     margin-top: 10px;
 }
-
-#AddToCart {
-    @include m.buttonStyles;
-    margin: 14px;
-
-    @media (max-width: 768px) {
-
-        float: right;
-
-    }
-
-}

@@ -75,6 +75,7 @@ function createSizeList(product: Product) {
   document.body.appendChild(sizeElement);
   return sizeElement;
 }
+
 function handleAddToCart(cart: Cart, product: Product) {
   const cartIcon = document.getElementById("cartSpan");
   document.getElementById(String(product.id))?.addEventListener("click", () => {
@@ -85,17 +86,11 @@ function handleAddToCart(cart: Cart, product: Product) {
       return;
     }
 
-    console.log("selected size : ", size);
-    console.log("Product before: ", product);
     let tempProduct = structuredClone(product);
     tempProduct.sizes.length = 0;
     tempProduct.sizes.push(Number(size));
-
-    cart.products.set(
-      JSON.stringify(tempProduct),
-      increamentQunatity(cart, JSON.stringify(tempProduct))
-    );
-
+    let quantity = increamentQunatity(cart, JSON.stringify(tempProduct));
+    cart.products.set(JSON.stringify(tempProduct), quantity);
     cart.totalPrice = calculateTotalPrice(cart);
     let cartCount = getTotalCount(cart);
     if (cartIcon !== null) {
@@ -104,6 +99,17 @@ function handleAddToCart(cart: Cart, product: Product) {
 
     const productElement = document.createElement("p");
     productElement.textContent = `Product ${cartCount}`;
+
+    const productsArray = Array.from(cart.products.entries());
+    const cartObject = {
+      products: productsArray,
+      totalPrice: cart.totalPrice,
+    };
+    // Convert the object to a JSON string
+    const jsonString = JSON.stringify(cartObject);
+
+    // Save the JSON string to local storage
+    localStorage.setItem("cart", jsonString);
   });
 }
 
@@ -113,21 +119,21 @@ function calculateTotalPrice(cart: Cart) {
     let p = JSON.parse(String(product));
 
     let subTotalPrice = p.price * quantity;
-    console.log("Sub total Price for produce: ", p, subTotalPrice);
+    console.log("Sub total Price for product: ", p, subTotalPrice);
     totalPrice += subTotalPrice;
-    console.log("Total Price for produce: ", p, totalPrice);
   });
+
+  console.log("Total Price for cart: ", cart, totalPrice);
   return totalPrice;
 }
 
 function increamentQunatity(cart: Cart, product: String) {
   let quantity = 1;
   if (cart.products.has(product)) {
-    cart.products.forEach((q, p) => {
-      if (p === product) {
-        quantity = q + 1;
-      }
-    });
+    let productQantity = cart.products.get(product);
+    if (typeof productQantity != "undefined") {
+      quantity += productQantity;
+    }
   }
 
   return quantity;
