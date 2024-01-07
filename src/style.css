@@ -1,13 +1,14 @@
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  
 }
 
 body {
   font-family: sans-serif;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 i {
@@ -19,8 +20,7 @@ a {
   color: white;
 }
 
-
-.navbar {
+.custom-navbar {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -30,7 +30,7 @@ a {
   margin-bottom: 30px;
 }
 
-.cart {
+.custom-cart {
   position: relative;
   background-color: #fff;
   color: #212529;
@@ -39,7 +39,7 @@ a {
   border-radius: 4px;
 }
 
-.cartAmount {
+.custom-cart-amount {
   position: absolute;
   top: -15px;
   right: -10px;
@@ -49,7 +49,6 @@ a {
   padding: 3px;
   border-radius: 3px;
 }
-
 
 .shop {
   display: grid;
@@ -75,6 +74,7 @@ a {
   border: 2px solid #212529;
   border-radius: 4px;
 }
+
 .item img {
   width: 100%;
   border-radius: 2px 2px 0 0;
@@ -109,7 +109,6 @@ a {
   color: green;
 }
 
-
 .text-center {
   text-align: center;
   margin-bottom: 20px;
@@ -130,14 +129,15 @@ a {
 .checkout {
   background-color: green;
 }
+
 .removeAll {
   background-color: red;
 }
+
 .bi-x-lg {
   color: red;
   font-weight: bold;
 }
-
 
 .shopping-cart {
   display: grid;
@@ -146,18 +146,19 @@ a {
   gap: 15px;
 }
 
-
 .cart-item {
   border: 2px solid #212529;
   border-radius: 5px;
   display: flex;
+  flex-direction: column; 
+  padding: 15px;
 }
 
 .title-price-x {
-  width: 195px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 .title-price {
@@ -166,9 +167,67 @@ a {
   gap: 10px;
 }
 
+.cart-item img {
+  width: 100%;
+  border-radius: 4px;
+  margin-bottom: 10px; 
+}
+
 .cart-item-price {
   background-color: #212529;
   color: white;
   border-radius: 4px;
   padding: 3px 6px;
+}
+
+.cart-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.content {
+  flex: 1;
+}
+
+.footer {
+  margin-top: auto;
+}
+
+.cart-buttons i {
+  font-size: 24px; 
+}
+
+.bi-dash-lg {
+  color: red;
+}
+
+.bi-plus-lg {
+  color: green;
+}
+
+.HomeBtn,
+.checkout,
+.removeAll {
+  background-color: #212529;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.checkout {
+  background-color: green;
+}
+
+.removeAll {
+  background-color: red;
+}
+
+.bi-x-lg {
+  color: red;
+  font-weight: bold;
 }
