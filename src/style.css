@@ -118,7 +118,7 @@ a {
 .HomeBtn,
 .checkout,
 .removeAll {
-  background-color: #007bff; /* Primary button color */
+  background-color: #007bff; 
   color: white;
   border: 1px solid transparent;
   padding: 10px 20px;
@@ -132,33 +132,30 @@ a {
   transition: background-color 0.3s, border-color 0.3s, color 0.3s;
 }
 
-/* Hover effect for buttons */
 .HomeBtn:hover,
 .checkout:hover,
 .removeAll:hover {
-  background-color: #0056b3; /* Darker shade for hover */
+  background-color: #0056b3;
   color: #fff;
   text-decoration: none;
 }
 
-/* Specific styles for checkout and remove all buttons */
 .checkout {
-  background-color: #28a745; /* Success color */
+  background-color: #28a745; 
 }
 
 .checkout:hover {
-  background-color: #218838; /* Darker shade for hover */
+  background-color: #218838; 
 }
 
 .removeAll {
-  background-color: #dc3545; /* Danger color */
+  background-color: #dc3545;
 }
 
 .removeAll:hover {
-  background-color: #c82333; /* Darker shade for hover */
+  background-color: #c82333; 
 }
 
-/* Styling for the bi-icons within buttons (if needed) */
 .buttons .bi {
   vertical-align: middle;
   padding-right: 3px;
