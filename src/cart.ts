@@ -1,19 +1,6 @@
-interface ShopItem {
-  id: number;
-  brand: string;
-  model: string;
-  color: string;
-  size: string[];
-  price: number;
-  image: string;
-  quantity: number;
-  description: string;
-}
+import { ShopItem, BasketItem } from "./interface/data";
+import * as bootstrap from 'bootstrap'
 
-interface BasketItem {
-  id: number;
-  item: number;
-}
 
 const ShoppingCart: HTMLElement | null = document.getElementById("shopping-cart");
 const label: HTMLElement | null = document.getElementById("label");
@@ -47,7 +34,7 @@ const generateCartItems = (): void => {
                         <p>${brand} ${model}</p>
                         <p class="cart-item-price">$ ${price}</p>
                       </h4>
-                      <i onclick="removeItem(${id})" class="bi bi-x-lg"></i>
+                      <!-- Removed the 'X' icon line here -->
                     </div>
                     <div class="cart-buttons">
                       <div class="buttons">
@@ -71,6 +58,9 @@ const generateCartItems = (): void => {
   }
 };
 
+
+
+
 const increment = (id: number): void => {
   const search = basket.find(x => x.id === id);
   if (!search) {
@@ -80,6 +70,8 @@ const increment = (id: number): void => {
   }
   updateCart(id);
 };
+
+
 
 const decrement = (id: number): void => {
   const search = basket.find(x => x.id === id);
@@ -129,6 +121,7 @@ const checkoutCart = (): void => {
   if (label) label.innerHTML = "";
   calculation();
 };
+
 
 calculation();
 generateCartItems();

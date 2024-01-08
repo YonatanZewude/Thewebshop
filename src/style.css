@@ -114,29 +114,54 @@ a {
   margin-bottom: 20px;
 }
 
+/* General button styling */
 .HomeBtn,
 .checkout,
 .removeAll {
-  background-color: #212529;
+  background-color: #007bff; /* Primary button color */
   color: white;
-  border: none;
-  padding: 6px;
-  border-radius: 3px;
+  border: 1px solid transparent;
+  padding: 10px 20px;
+  border-radius: 5px;
   cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
   margin-top: 10px;
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
 }
 
+/* Hover effect for buttons */
+.HomeBtn:hover,
+.checkout:hover,
+.removeAll:hover {
+  background-color: #0056b3; /* Darker shade for hover */
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Specific styles for checkout and remove all buttons */
 .checkout {
-  background-color: green;
+  background-color: #28a745; /* Success color */
+}
+
+.checkout:hover {
+  background-color: #218838; /* Darker shade for hover */
 }
 
 .removeAll {
-  background-color: red;
+  background-color: #dc3545; /* Danger color */
 }
 
-.bi-x-lg {
-  color: red;
-  font-weight: bold;
+.removeAll:hover {
+  background-color: #c82333; /* Darker shade for hover */
+}
+
+/* Styling for the bi-icons within buttons (if needed) */
+.buttons .bi {
+  vertical-align: middle;
+  padding-right: 3px;
 }
 
 .shopping-cart {
@@ -180,54 +205,10 @@ a {
   padding: 3px 6px;
 }
 
-.cart-buttons {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-}
-
 .content {
   flex: 1;
 }
 
 .footer {
   margin-top: auto;
-}
-
-.cart-buttons i {
-  font-size: 24px; 
-}
-
-.bi-dash-lg {
-  color: red;
-}
-
-.bi-plus-lg {
-  color: green;
-}
-
-.HomeBtn,
-.checkout,
-.removeAll {
-  background-color: #212529;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-  margin-top: 20px;
-}
-
-.checkout {
-  background-color: green;
-}
-
-.removeAll {
-  background-color: red;
-}
-
-.bi-x-lg {
-  color: red;
-  font-weight: bold;
 }

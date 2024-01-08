@@ -1,21 +1,6 @@
 import * as bootstrap from 'bootstrap';
+import { ShopItem, BasketItem } from "./interface/data";
 
-interface ShopItem {
-  id: number;
-  brand: string;
-  model: string;
-  color: string;
-  size: string[];
-  price: number;
-  image: string;
-  quantity: number;
-  description: string;
-}
-
-interface BasketItem {
-  id: number;
-  item: number;
-}
 
 const shop = document.getElementById("shop") as HTMLElement;
 let basket: BasketItem[] = JSON.parse(localStorage.getItem("data") || "[]");
@@ -77,6 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 const showModal = (id: number): void => {
+  console.log("Opening modal for product ID:", id);
   const product = shopItemsData.find(x => x.id === id);
   if (!product) {
     console.error(`Product with id ${id} not found!`);
@@ -95,17 +81,20 @@ const showModal = (id: number): void => {
     modalBody.appendChild(createDetailsElement('Price', `$${product.price}`));
     modalBody.appendChild(createDetailsElement('Description', product.description));
 
-    const modalElement = document.getElementById('productModal');
+    const modalElement = document.getElementById('productModal') as HTMLElement | null;
     if (modalElement) {
-      const modal = new bootstrap.Modal(modalElement);
-      modal.dispose();  // Dispose the current instance
-      const newModal = new bootstrap.Modal(modalElement); // Create a new instance
-      newModal.show();
+      const modal = new bootstrap.Modal(modalElement, {
+        keyboard: true
+      });
+      modal.show();
+    } else {
+      console.error('Modal element not found!');
     }
   } else {
     console.error('One or more modal elements were not found!');
   }
 };
+
 
 function createDetailsElement(label: string, value: string | number): HTMLParagraphElement {
   const p: HTMLParagraphElement = document.createElement("p");
