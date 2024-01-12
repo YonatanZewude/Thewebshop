@@ -1,0 +1,78 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+#checkout-container {
+    max-width: 600px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+
+    @media screen and (max-width: 600px) {
+        display: flex;
+        flex-direction: column;
+        width: 98%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+#checkout-form {
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    width: 60%;
+    margin: 10px;
+
+    @media screen and (max-width: 600px) {
+        width: 98%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+#checkoutLabel {
+    display: block;
+    margin-bottom: 8px;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+}
+
+.error-message {
+    color: red;
+    font-weight: bold;
+}
+
+.success-message {
+    color: green;
+    font-weight: bold;
+}
+
+#orderSummary {
+    border: 2px solid black;
+    margin: 10px;
+    border-radius: 10px;
+    width: 40%;
+    height: 200px;
+
+    @media screen and (max-width: 600px) {
+        margin-left: auto;
+        margin-right: auto;
+        width: 98%;
+    }
+}

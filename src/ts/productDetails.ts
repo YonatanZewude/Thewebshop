@@ -1,5 +1,10 @@
 import "./../scss/style.scss";
-import { createAddToCartButton, createDetailsElement } from "./functions.ts";
+import {
+  createAddToCartButton,
+  createDetailsElement,
+  getTotalCount,
+  saveCartToLocalStorage,
+} from "./functions.ts";
 import { Cart } from "./models/cart.ts";
 import { Product } from "./models/product.ts";
 
@@ -25,8 +30,6 @@ export function createHtmlModal(cart: Cart, product: Product) {
 
     const color = createDetailsElement("Color", `${product.color}`);
 
-    const quantity = createDetailsElement("Quantity", `${product.quantity}`);
-
     const size = createSizeList(product);
 
     const price = createDetailsElement("Price", `${product.price} kr`);
@@ -43,7 +46,6 @@ export function createHtmlModal(cart: Cart, product: Product) {
     details.appendChild(brand);
     details.appendChild(model);
     details.appendChild(color);
-    details.appendChild(quantity);
     details.appendChild(size);
     details.appendChild(price);
     details.appendChild(discription);
@@ -100,14 +102,7 @@ function handleAddToCart(cart: Cart, product: Product) {
     const productElement = document.createElement("p");
     productElement.textContent = `Product ${cartCount}`;
 
-    const productsArray = Array.from(cart.products.entries());
-    const cartObject = {
-      products: productsArray,
-      totalPrice: cart.totalPrice,
-    };
-    const jsonString = JSON.stringify(cartObject);
-
-    localStorage.setItem("cart", jsonString);
+    saveCartToLocalStorage(cart);
   });
 }
 
@@ -117,11 +112,9 @@ function calculateTotalPrice(cart: Cart) {
     let p = JSON.parse(String(product));
 
     let subTotalPrice = p.price * quantity;
-    console.log("Sub total Price for product: ", p, subTotalPrice);
     totalPrice += subTotalPrice;
   });
 
-  console.log("Total Price for cart: ", cart, totalPrice);
   return totalPrice;
 }
 
@@ -135,9 +128,4 @@ function increamentQunatity(cart: Cart, product: String) {
   }
 
   return quantity;
-}
-function getTotalCount(cart: Cart) {
-  let totalCount = 0;
-  cart.products.forEach((quantity, _) => (totalCount += quantity));
-  return totalCount;
 }

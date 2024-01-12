@@ -10,12 +10,19 @@ body {
   width: 100%;
   background-color: #4d4d4d;
   position: relative;
+  margin: 0;
+  padding: 0;
+  padding-top: 10px;
 }
 
 .nav>.nav-header {
   display: inline;
   margin-left: auto;
   margin-right: auto;
+
+  @media screen and (max-width: 600px) {
+    padding-right: 30%;
+  }
 }
 
 .nav>.nav-header>.nav-title {
@@ -23,6 +30,7 @@ body {
   font-size: 22px;
   color: #fff;
   padding: 10px;
+  margin-left: 100px;
 }
 
 .nav>.nav-btn {
@@ -49,14 +57,14 @@ body {
 .nav>.nav-links>a:hover {
   background-color: rgba(0, 0, 0, 0.3);
   border-radius: 7px;
-  height: 50px;
+  height: 40px;
 }
 
 .nav>#nav-check {
   display: none;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 756px) {
   .nav>.nav-btn {
     display: inline-block;
     position: absolute;

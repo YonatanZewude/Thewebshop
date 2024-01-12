@@ -6,6 +6,16 @@ import { getProductById, getProductsFromJson } from "./functions.ts";
 import { createDetailsElement } from "./functions.ts";
 import { Cart } from "./models/cart.ts";
 
+document.addEventListener("DOMContentLoaded", function () {
+  const navTitle = document.querySelector(".nav-title");
+
+  if (navTitle) {
+    navTitle.addEventListener("click", function () {
+      window.location.href = "/index.html";
+    });
+  }
+});
+
 let cart = new Cart(new Map(), 0);
 
 export function createProductCard(product: Product) {
@@ -62,6 +72,7 @@ function modalHandler(product: Product) {
       if (product.id != null) {
         await getProductById(product.id);
         createHtmlModal(cart, product);
+
         const modalElement = document.getElementById("exampleModal");
         if (modalElement) {
           const myModal = new bootstrap.Modal(modalElement);

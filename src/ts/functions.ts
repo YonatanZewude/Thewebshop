@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Product } from "./models/product.ts";
 import { createProductCard } from "./main.ts";
+import { Cart } from "./models/cart.ts";
 
 export async function getProductById(id: number) {
   try {
@@ -11,6 +12,13 @@ export async function getProductById(id: number) {
     console.error("Error fetching product details:", error);
     throw error;
   }
+}
+
+function displayProducts(products: Array<Product>) {
+  const productContainer = document.getElementById("product-container");
+  products.forEach((product) =>
+    productContainer?.appendChild(createProductCard(product))
+  );
 }
 
 export function getProductsFromJson() {
@@ -37,15 +45,6 @@ export function getProductsFromJson() {
     .catch((error) => console.error("Error fetching products:", error));
 }
 
-function displayProducts(products: Array<Product>) {
-  const productContainer = document.getElementById("product-container");
-
-  products.forEach((product) => {
-    const card = createProductCard(product);
-    productContainer?.appendChild(card);
-  });
-}
-
 export const createDetailsElement = (
   label: string,
   value: string | number
@@ -62,4 +61,33 @@ export function createAddToCartButton(product: Product) {
   addToCart.classList.add("addToCart");
 
   return addToCart;
+}
+
+export function saveCartToLocalStorage(cart: Cart) {
+  const productsArray = Array.from(cart.products.entries());
+  const cartObject = {
+    products: productsArray,
+    totalPrice: cart.totalPrice,
+  };
+  const jsonString = JSON.stringify(cartObject);
+
+  localStorage.setItem("cart", jsonString);
+}
+
+export function loadDataFromLocalStorage(key: string) {
+  const storedJsonString = localStorage.getItem(key);
+
+  if (!storedJsonString) {
+    console.error(`Unable to load cart data from local storage`);
+    return null;
+  }
+  const storedCartObject = JSON.parse(storedJsonString) as Cart;
+  const storedProductsMap = new Map(storedCartObject.products);
+  return new Cart(storedProductsMap, storedCartObject.totalPrice);
+}
+
+export function getTotalCount(cart: Cart) {
+  let totalCount = 0;
+  cart.products.forEach((quantity, _) => (totalCount += quantity));
+  return totalCount;
 }

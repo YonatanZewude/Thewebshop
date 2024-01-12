@@ -4,6 +4,10 @@ html {
     scroll-behavior: smooth;
 }
 
+body {
+    scroll-behavior: smooth;
+}
+
 .footer {
     background-color: v.$footerAndHeader-background;
     color: #fff;
@@ -81,9 +85,7 @@ html {
     border-radius: 7px;
 }
 
-body {
-    scroll-behavior: smooth;
-}
+
 
 .scrollUpButton {
     background-color: #568dc7;
@@ -100,7 +102,6 @@ body {
     background-color: #386fa4;
 }
 
-/* Show the button when scrolling down */
 body.scroll-down #scrollUpButton {
     display: block;
 }
