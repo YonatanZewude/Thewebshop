@@ -79,9 +79,10 @@ function createProductCardforCart() {
       });
 
       imgContainer?.appendChild(image);
-      productDetails?.appendChild(brand);
       productDetails?.appendChild(size);
+      productDetails?.appendChild(brand);
       productDetails?.appendChild(price);
+
       productDetails.appendChild(productQuantity);
       cartContainer?.appendChild(imgContainer);
       cartContainer?.appendChild(productDetails);
