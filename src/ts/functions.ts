@@ -5,7 +5,7 @@ import { Cart } from "./models/cart.ts";
 
 export async function getProductById(id: number) {
   try {
-    const response = await axios.get(`./src/test.json?id=${id}`);
+    const response = await axios.get(`/test.json?id=${id}`);
     console.log("Product details:", response.data);
     return response.data;
   } catch (error) {
@@ -20,9 +20,8 @@ function displayProducts(products: Array<Product>) {
     productContainer?.appendChild(createProductCard(product))
   );
 }
-
 export function getProductsFromJson() {
-  fetch("./src/test.json")
+  fetch("/test.json")
     .then((response) => response.json())
     .then((products) => {
       const productsList = products.map(

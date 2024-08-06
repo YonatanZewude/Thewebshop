@@ -5,16 +5,19 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build --mode production",
     "preview": "vite preview"
   },
   "devDependencies": {
     "@types/bootstrap": "^5.2.10",
     "@types/jquery": "^3.5.29",
     "@types/node": "^20.10.5",
+    "html-webpack-plugin": "^5.6.0",
     "sass": "^1.69.5",
     "typescript": "^5.0.2",
-    "vite": "^4.4.5"
+    "vite": "^4.4.5",
+    "webpack": "^5.90.3",
+    "webpack-cli": "^5.1.4"
   },
   "dependencies": {
     "axios": "^1.6.3",

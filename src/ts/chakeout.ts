@@ -1,6 +1,8 @@
+import { INSPECT_MAX_BYTES } from "buffer";
 import "./../scss/style.scss";
 import { createDetailsElement, getTotalCount } from "./functions";
 import { Cart } from "./models/cart";
+import { url } from "inspector";
 
 document.addEventListener("DOMContentLoaded", () => {
   const submit = document.getElementById("submit");
@@ -122,4 +124,37 @@ function loadDataFromLocalStorage(key: string) {
   const storedProductsMap = new Map(storedCartObject.products);
 
   return new Cart(storedProductsMap, storedCartObject.totalPrice);
+}
+const checkout: HTMLElement | null = document.getElementById("submit");
+
+if (checkout) {
+  checkout.addEventListener("click", () => {
+    fetch("/create-checkout-session", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        items: [
+          { id: 1, quantity: 3 },
+          { id: 2, quantity: 1 },
+        ],
+      }),
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          return res.json().then((error) => Promise.reject(error));
+        }
+      })
+      .then(({ url }) => {
+        window.location.href = url;
+      })
+      .catch((e) => {
+        console.error(e.error);
+      });
+  });
+} else {
+  console.error("Checkout button not found");
 }
